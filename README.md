@@ -135,7 +135,7 @@ AsyncAPI будет используют для асинхронного вза�
 [Диаграмма Partner Network Online](http://localhost:9003/docs)
 
 [Диаграмма Sensor Monitoring](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/sensor_monitoring/swagger.json)  
-[Диаграмма Sensor Monitoring] Online](http://localhost:9004/docs)
+[Диаграмма Sensor Monitoring Online](http://localhost:9004/docs)
 
 # Задание 5. Работа с docker и docker-compose
 

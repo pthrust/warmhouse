@@ -4,7 +4,7 @@ from fastapi import FastAPI, APIRouter
 router = APIRouter(prefix="/api")
 #router.include_router(v1_router)
 
-app = FastAPI(title="Order Management Service", version="1.0.0")
+app = FastAPI(title="Web Application Service", version="1.0.0")
 #app.include_router(router)
 
 @app.get("/health")

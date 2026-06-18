@@ -15,6 +15,19 @@ services:
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
 
+  webapp:
+    build:
+      context: ./webapp
+      dockerfile: Dockerfile
+    container_name: webapp
+    environment:
+      - PORT=9000
+    ports:
+      - "9000:9000"
+    restart: unless-stopped
+    networks:
+      - smarthome-network
+
   module-managment:
     build:
       context: ./module_managment
@@ -29,11 +42,47 @@ services:
     networks:
       - smarthome-network
 
-  #order-managment:
+  order-managment:
+    build:
+      context: ./order_managment
+      dockerfile: Dockerfile
+    container_name: order-managment
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/smarthome
+      - PORT=9002
+    ports:
+      - "9002:9002"
+    restart: unless-stopped
+    networks:
+      - smarthome-network
 
-  #partner-network:
+  partner-network:
+    build:
+      context: ./partner_network
+      dockerfile: Dockerfile
+    container_name: partner-network
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/smarthome
+      - PORT=9003
+    ports:
+      - "9003:9003"
+    restart: unless-stopped
+    networks:
+      - smarthome-network
 
-  #sensor-monitoring:
+  sensor-monitoring:
+    build:
+      context: ./sensor_monitoring
+      dockerfile: Dockerfile
+    container_name: sensor-monitoring
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/smarthome
+      - PORT=9004
+    ports:
+      - "9004:9004"
+    restart: unless-stopped
+    networks:
+      - smarthome-network
 
   temperature-api:
     build:
