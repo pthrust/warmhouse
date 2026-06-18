@@ -8,7 +8,7 @@
 
 Чтобы составить документ с описанием текущей архитектуры приложения, можно часть информации взять из описания компании и условия задания. Это нормально.
 
-</aside
+</aside>
 
 ### 1. Описание функциональности монолитного приложения
 
@@ -85,18 +85,8 @@
 
 ### 5. Визуализация контекста системы — диаграмма С4
 
-Добавьте сюда диаграмму контекста в модели C4.
-
-Чтобы добавить ссылку в файл Readme.md, нужно использовать синтаксис Markdown. Это делают так:
-
 ```markdown
-[Текст ссылки](URL)
-```
-
-Замените `Текст ссылки` текстом, который хотите использовать для ссылки. Вместо `URL` вставьте адрес, на который должна вести ссылка. Например:
-
-```markdown
-[Посетите Яндекс](https://ya.ru/)
+[Схема монолитного приложения](https://github.com/pthrust/warmhouse/blob/warmhouse/schemas/contexts/monolithic.png)
 ```
 
 # Задание 2. Проектирование микросервисной архитектуры
@@ -105,29 +95,38 @@
 
 **Диаграмма контейнеров (Containers)**
 
-Добавьте диаграмму.
+[Диаграмма микросервисов](https://github.com/pthrust/warmhouse/blob/warmhouse/schemas/containers/microservices.png)
 
 **Диаграмма компонентов (Components)**
 
-Добавьте диаграмму для каждого из выделенных микросервисов.
+[Диаграмма Web](https://github.com/pthrust/warmhouse/blob/warmhouse/schemas/components/web.png)
+[Диаграмма Partner Network](https://github.com/pthrust/warmhouse/blob/warmhouse/schemas/components/partner_network.png)
+[Диаграмма Order Managment](https://github.com/pthrust/warmhouse/blob/warmhouse/schemas/components/order_managment.png)
+[Диаграмма Module Managment](https://github.com/pthrust/warmhouse/blob/warmhouse/schemas/components/module_managment.png)
+[Диаграмма Sensor Monitoring](https://github.com/pthrust/warmhouse/blob/warmhouse/schemas/components/sensor_monitoring.png)
 
 **Диаграмма кода (Code)**
 
-Добавьте одну диаграмму или несколько.
+[Диаграмма Device](https://github.com/pthrust/warmhouse/blob/warmhouse/schemas/code/device.png)
 
 # Задание 3. Разработка ER-диаграммы
 
-Добавьте сюда ER-диаграмму. Она должна отражать ключевые сущности системы, их атрибуты и тип связей между ними.
+[Диаграмма Device](https://github.com/pthrust/warmhouse/blob/warmhouse/schemas/er/er.png)
 
 # Задание 4. Создание и документирование API
 
 ### 1. Тип API
 
-Укажите, какой тип API вы будете использовать для взаимодействия микросервисов. Объясните своё решение.
+REST (HTTP/JSON) API будет использован для синхронного взаимодействия между клиентами и микоросервисами плюс простота разработки и отладки. А для описания API будем исопользовать swagger спецификацию.
+
+AsyncAPI будет используют для асинхронного взаимодействия с модулями партнеров, т.к. сенсоры отправляют телеметрию в любой момент времени.
 
 ### 2. Документация API
 
-Здесь приложите ссылки на документацию API для микросервисов, которые вы спроектировали в первой части проектной работы. Для документирования используйте Swagger/OpenAPI или AsyncAPI.
+[Диаграмма Partner Network](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/partner_network/swagger.yaml)
+[Диаграмма Order Managment](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/order_managment/swagger.yaml)
+[Диаграмма Module Managment](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/module_managment/swagger.yaml)
+[Диаграмма Sensor Monitoring](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/sensor_monitoring/swagger.yaml)
 
 # Задание 5. Работа с docker и docker-compose
 
@@ -173,7 +172,7 @@ Locations - название комнаты, sensorId - идентификато
 
 2) Приложение следует упаковать в Docker и добавить в docker-compose. Порт по умолчанию должен быть 8081
 
-3) Кроме того для smart_home приложения требуется база данных - добавьте в docker-compose файл настройки для запуска postgres с указанием скрипта инициализации ./smart_home/init.sql
+3) Кроме того для smart_home приложения требуется база данных - добавьте в docker-compose файл настройки для запуска postgres с указанием скрипта инициализации ./db_scripts/init.sql
 
 Для проверки можно использовать Postman коллекцию smarthome-api.postman_collection.json и вызвать:
 
