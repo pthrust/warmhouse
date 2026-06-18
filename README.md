@@ -125,13 +125,17 @@ AsyncAPI будет используют для асинхронного вза�
 
 ### 2. Документация API
 
-[Диаграмма Partner Network](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/partner_network/swagger.yaml)
+[Диаграмма Module Managment](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/module_managment/swagger.json)  
+[Диаграмма Module Managment Online](http://localhost:9001/docs)
 
-[Диаграмма Order Managment](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/order_managment/swagger.yaml)
+[Диаграмма Order Managment](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/order_managment/swagger.json)  
+[Диаграмма Order Managment Online](http://localhost:9002/docs)
 
-[Диаграмма Module Managment](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/module_managment/swagger.yaml)
+[Диаграмма Partner Network](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/partner_network/swagger.json)  
+[Диаграмма Partner Network Online](http://localhost:9003/docs)
 
-[Диаграмма Sensor Monitoring](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/sensor_monitoring/swagger.yaml)
+[Диаграмма Sensor Monitoring](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/sensor_monitoring/swagger.json)  
+[Диаграмма Sensor Monitoring] Online](http://localhost:9004/docs)
 
 # Задание 5. Работа с docker и docker-compose
 
