@@ -1,0 +1,46 @@
+@startuml
+title Warmhouse System Microservices
+
+top to bottom direction
+
+!includeurl ../include/C4_Component.puml
+
+Person(customer, "Customer", "Warmhouse's users")
+Person(partner, "Partner", "Providing various services of modules such as install, repair, etc")
+Person(employee, "GTM Department", "Warmhouse's employee")
+
+System(warmhouse, "Microservices Schema")
+
+Container_Boundary(warmhouse, "Warmhouse System") {
+  Container(WebApp, "Web application", "Python", "Frontend")
+  Container(SensorMonitoring, "Sensor Monitoring", "Microservice")
+  Container(ModuleManagment, "Module Managment", "Microservice")
+  Container(OrderManagment, "Order managment", "Microservice")
+  Container(PartnerNetwork, "Partner network", "Microservice")
+  Container(Database, "Database", "PostgreSQL", "Backend")
+}
+
+
+Container_Boundary(Modules, "Modules") {
+  System_Ext(relay, "Relay", "On/off module")
+  System_Ext(sensors, "Sensors", "Control sensors")
+}
+
+
+Rel(customer, WebApp, "Using the system for remote work with modules")
+Rel(partner, WebApp, "Register in system to provide services")
+Rel(employee, WebApp, "Verificating new register partners, adding marketing campaings")
+
+Rel(WebApp,PartnerNetwork,"User submit a request for partner service")
+Rel(WebApp,OrderManagment,"Marketing specialist create a marketing campaign")
+Rel(WebApp,ModuleManagment,"Send control command to module managment")
+Rel(WebApp,PartnerNetwork,"Register a new partner")
+Rel(PartnerNetwork,Database,"R/W data")
+Rel(OrderManagment,Database,"R/W data")
+
+Rel(ModuleManagment,relay,"On/off relay")
+Rel(ModuleManagment,Database,"R/W status relay or read telemetry")
+Rel(sensors,SensorMonitoring,"Sending telemetry from sensors")
+Rel(SensorMonitoring,Database,"Save telemetry")
+
+@enduml

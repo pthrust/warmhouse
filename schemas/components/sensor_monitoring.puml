@@ -1,0 +1,32 @@
+@startuml
+title Warmhouse System Sensor Monitoring
+
+top to bottom direction
+
+!includeurl ../include/C4_Component.puml
+
+Container_Boundary(warmhouse, "Warmhouse System") {
+
+  Container(SensorMonitoring, "Sensor Monitoring", "General Logic", "Analize raw sensors protocol data and save telemetry")
+
+  Container(Database, "Database", "Postgersql")
+}
+
+Container_Boundary(SensorMonitoring, "Sensor Monitoring") {
+
+  Container(NewSensorMonitoring, "Sensor Monitoring", "Microservice")
+  Container(LegacyApp, "Smart home", "Legacy go application")
+}
+
+
+Container_Boundary(Modules, "Modules") {
+  System_Ext(sensors, "Sensors", "Control sensor")
+}
+
+Rel(NewSensorMonitoring,Database,"Save telemetry")
+Rel(sensors,NewSensorMonitoring,"Send telemetry")
+
+Rel(LegacyApp,sensors,"Read telemetry by demand")
+Rel(sensors,LegacyApp,"Send telemetry to customer by demand")
+
+@enduml

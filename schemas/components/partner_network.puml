@@ -1,0 +1,27 @@
+@startuml
+title Warmhouse System Partner Network
+
+top to bottom direction
+
+!includeurl ../include/C4_Component.puml
+
+Container_Boundary(warmhouse, "Warmhouse System") {
+  Container(WebApp, "Web application", "Python")
+
+  Container(PartnerNetwork, "Partner network", "Microservice", "Contains information about warmhous's partners and their provided services")
+
+  Container(Database, "Database", "Postgersql")
+}
+
+Container(WebApp, "Web Application", "Python") {
+  Component(customerprofile, "CustomerProfile", "Contol customer profile")
+  Component(partnerprofile, "PartnerProfile", "Contol partner profile")
+  Component(employeeprofile, "EmployeeProfile", "Contol employee profile")
+}
+
+Rel(employeeprofile,PartnerNetwork,"Create service item")
+Rel(PartnerNetwork,customerprofile,"Get partner service list")
+Rel(PartnerNetwork,partnerprofile,"Get a list of services to select supported ones")
+Rel(PartnerNetwork,Database, "R/W partner service list")
+
+@enduml
