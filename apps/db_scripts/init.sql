@@ -17,6 +17,24 @@ CREATE TABLE IF NOT EXISTS sensors (
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
 
+INSERT INTO sensors (name, type, location, value, unit, status)
+SELECT
+    loc || ' temperature' AS name,
+    'temperature' AS type,
+    loc AS location,
+    0 AS value,
+    'C' AS unit,
+    CASE WHEN random() < 0.5 THEN 'active' ELSE 'inactive' END AS status
+FROM (
+    SELECT
+        CASE floor(random() * 3)::int
+            WHEN 0 THEN 'Living Room'
+            WHEN 1 THEN 'Bedroom'
+            ELSE 'Kitchen'
+        END AS loc
+    FROM generate_series(1, 2500) AS i
+) t;
+
 -- Create indexes for common queries
 CREATE INDEX IF NOT EXISTS idx_sensors_type ON sensors(type);
 CREATE INDEX IF NOT EXISTS idx_sensors_location ON sensors(location);
@@ -378,3 +396,22 @@ SELECT
     CURRENT_TIMESTAMP,
     CURRENT_TIMESTAMP
 FROM sensor_rows sr;
+
+INSERT INTO Users (uid, name, email, phone, password, token, usertype_uid)
+SELECT
+    CAST(
+        CONCAT(
+            SUBSTRING(LPAD(TO_HEX(i), 32, '0'), 1, 8), '-',
+            SUBSTRING(LPAD(TO_HEX(i), 32, '0'), 9, 4), '-',
+            SUBSTRING(LPAD(TO_HEX(i), 32, '0'), 13, 4), '-',
+            SUBSTRING(LPAD(TO_HEX(i), 32, '0'), 17, 4), '-',
+            SUBSTRING(LPAD(TO_HEX(i), 32, '0'), 21, 12)
+        ) AS UUID
+    ) AS uid,
+    'Mono_User_' || i AS name,
+    'mono_user' || i || '@example.com' AS email,
+    '+7-900-' || LPAD(i::TEXT, 3, '0') || '-12-34' AS phone,
+    MD5('password' || i) AS password,
+    MD5(gen_random_uuid()::TEXT) AS token,
+    (SELECT uid FROM UserTypes WHERE name = 'client' LIMIT 1) AS usertype_uid
+FROM generate_series(0, 2499) AS i;

@@ -21,7 +21,9 @@ services:
       dockerfile: Dockerfile
     container_name: webapp
     environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/smarthome
       - PORT=9000
+      - MODULES_SERVICE_URL=http://module-managment:9001/api/v1/modules
     ports:
       - "9000:9000"
     restart: unless-stopped

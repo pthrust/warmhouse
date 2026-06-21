@@ -1,6 +1,5 @@
 from fastapi import APIRouter
-#from api.v1.endpoints import modules, sensors
+from api.v1.endpoints import users
 
 router = APIRouter(prefix="/v1")
-#router.include_router(modules.router)
-#router.include_router(sensors.router)
+router.include_router(users.router)
