@@ -206,4 +206,8 @@ Locations - название комнаты, sensorId - идентификато
 
 - На момент перехода, в старой системе зарегистрировано 2500 пользоваетелей и часть полтзователей компания зарегистрировала в новой системе и научила их пользоваться.
 
+[Результат монолита в новой системе для старых пользователей с сенсорами](https://github.com/pthrust/warmhouse/blob/warmhouse/screenshots/old_system_result.png)
+
+[Результат в новой системе для новых пользователей с модулями](https://github.com/pthrust/warmhouse/blob/warmhouse/screenshots/new_system_result.png)
+
 В результате у вас должны быть созданы Dockerfiles и docker-compose для запуска микросервисов. 
