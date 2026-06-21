@@ -1,0 +1,28 @@
+@startuml
+title Warmhouse System Order Managment
+
+top to bottom direction
+
+!includeurl ../include/C4_Component.puml
+
+Container_Boundary(warmhouse, "Warmhouse System") {
+  Container(WebApp, "Web application", "Python")
+
+  Container(OrderManagment, "Order Managment", "Microservice", "Contains information about partners's modules and marketing campaign")
+
+  Container(Database, "Database", "Postgersql")
+}
+
+Container(WebApp, "Web Application", "Python") {
+  Component(customerprofile, "CustomerProfile", "Contol customer profile")
+  Component(partnerprofile, "PartnerProfile", "Contol partner profile")
+  Component(employeeprofile, "EmployeeProfile", "Contol employee profile")
+}
+
+Rel(employeeprofile,OrderManagment,"Create marketing campaigns")
+Rel(partnerprofile,OrderManagment,"Add new information modules")
+Rel(OrderManagment,customerprofile,"View marketing campaigns and modules")
+Rel(employeeprofile,OrderManagment,"Verify partner's module information")
+Rel(OrderManagment,Database, "R/W campaings and modules")
+
+@enduml

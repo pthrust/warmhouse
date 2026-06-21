@@ -1,0 +1,35 @@
+@startuml
+title Warmhouse System Module Managment
+
+top to bottom direction
+
+!includeurl ../include/C4_Component.puml
+
+Container_Boundary(warmhouse, "Warmhouse System") {
+  Container(WebApp, "Web application", "Python")
+
+  Container(ModuleManagment, "Module managment", "Microservice", "Control customer's module")
+
+  Container(Database, "Database", "Postgersql")
+}
+
+Container_Boundary(Modules, "Modules") {
+  System_Ext(relay, "Relay", "On/off module")
+}
+
+Container(WebApp, "Web Application", "Python") {
+  Component(customerprofile, "CustomerProfile", "Contol customer profile")
+}
+
+Rel(customerprofile,ModuleManagment,"Register module in system")
+Rel(customerprofile,ModuleManagment,"Control module stettings")
+Rel(customerprofile,ModuleManagment,"Control relay")
+Rel(ModuleManagment,customerprofile,"Send sensor telemetry")
+Rel(ModuleManagment,Database,"R/W relay status")
+Rel(Database,ModuleManagment,"Get telemetry")
+
+Rel(ModuleManagment,relay,"On/off relay")
+Rel(ModuleManagment,Database,"R/W status relay or read telemetry")
+
+
+@enduml

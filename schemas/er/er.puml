@@ -1,0 +1,111 @@
+@startuml
+
+skinparam linetype ortho
+
+entity "Users" as users {
+  *uid : uniq number <<generated>>
+  --
+  *name : text
+  *email : text
+  *phone : text
+  *password : text
+  *usertype_uid : number <<FK>>
+}
+
+entity "UserTypes" as user_t {
+  *uid : uniq number <<generated>>
+  --
+  *name : text
+}
+
+entity "Houses" as houses {
+  *uid : uniq number <<generated>>
+  --
+  * user_uid : number <<FK>>
+  * address : text
+}
+
+entity "Modules" as modules {
+  *uid : uniq number <<generated>>
+  --
+  * house_uid : number <<FK>>
+  * name : text
+  * serial_number : text
+  * relay_status : boolean
+  * register_date : timestamp with time zone default now()
+}
+
+entity "AsyncSensors" as sensors {
+  *uid : uniq number <<generated>>
+  --
+  * module_id : number <<FK>>
+  * name : varchar(100) 
+  * type_uid : number <<FK>>
+  * location : varchar(100) 
+  * serial_number : varchar(100) 
+  * status : varchar(20)  default 'inactive'
+  * last_updated : timestamp with time zone  default now()
+  * created_at : timestamp with time zone  default now()
+}
+
+entity "AsyncSensorTypes" as sensor_t {
+  *uid : uniq number <<generated>>
+  --
+  *name : text
+}
+
+entity "PartnerServices" as partner_service {
+  *uid : uniq number <<generated>>
+  --
+  * name : text
+  * user_uid : number <<FK>>
+  * service_uid : number <<FK>>
+  * coast : number
+}
+
+entity "PartnerModule" as partner_module {
+  *uid : uniq number <<generated>>
+  --
+  * name : text
+  * user_uid : number <<FK>>
+  * description : text
+  * date_release : timestamp with time zone  default now()
+  * is_available : boolean
+}
+
+entity "Orders" as orders {
+  *uid : uniq number <<generated>>
+  --
+  * name : text
+  * user_uid : number <<FK>>
+  * partner_service_uid : number <<FK>>
+  * is_done : text
+}
+
+entity "Services" as services {
+  * uid : uniq number <<generated>>
+  --
+  * name : text
+}
+
+entity "MarketingCampaign" as marketing_campaign {
+  * uid : uniq number <<generated>>
+  --
+  * description : text
+  * start_date : timestamp with time zone  default now()
+  * stop_date : timestamp with time zone  default now()
+}
+
+users ||..o{ houses
+users ||..o{ partner_service
+users ||..o{ orders
+users ||..o{ marketing_campaign
+users ||..o{ partner_module
+houses ||..o{ modules
+modules ||..|{ sensors
+user_t ||..o{ users
+sensor_t ||..o{ sensors
+partner_service ||..|| services
+orders ||..|{ partner_service
+
+@enduml

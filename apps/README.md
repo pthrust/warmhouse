@@ -28,23 +28,6 @@ docker-compose up -d
 
 The API will be available at http://localhost:8080
 
-### Option 2: Manual setup
-
-If you prefer to run the application without Docker:
-
-1. Start the PostgreSQL database:
-
-```bash
-docker-compose up -d postgres
-```
-
-2. Build and run the application:
-
-```bash
-go build -o smarthome
-./smarthome
-```
-
 ## API Testing
 
 A Postman collection is provided for testing the API. Import the `smarthome-api.postman_collection.json` file into Postman to get started.
@@ -58,3 +41,27 @@ A Postman collection is provided for testing the API. Import the `smarthome-api.
 - `PUT /api/v1/sensors/:id` - Update a sensor
 - `DELETE /api/v1/sensors/:id` - Delete a sensor
 - `PATCH /api/v1/sensors/:id/value` - Update a sensor's value and status
+
+## API Scope
+OpenAPI contract is described in ../swagger-api.yaml. WebApp exposes:
+
+Auth: /api/v1/auth/login, /api/v1/auth/logout
+Users: /api/v1/users...
+Houses: /api/v1/houses...
+Sensors: proxied to SensorManagerService
+Devices: proxied to DeviceHandleService
+
+
+## Services
+
+webapp            (Python FastAPI): http://localhost:9080
+
+module_managment  (Python FastAPI): http://localhost:9001
+order_managment   (Python FastAPI): http://localhost:9002
+partner_network   (Python FastAPI): http://localhost:9003
+sensor_monitoring (Python FastAPI): http://localhost:9004
+
+temperature-api   (Python FastAPI): http://localhost:8081
+smart-home    legacy monolith (Go): http://localhost:8080
+
+postgres: localhost:5432

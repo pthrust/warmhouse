@@ -1,0 +1,18 @@
+@startuml
+
+!includeurl ../include/C4_Context.puml
+
+title Warmhouse System Monolithic Application
+
+Person(customer, "Customer", "Warmhouse's users")
+Person(specialist, "Sensor technician", "Install tempreture sensors")
+
+System(monolithic, "Internet Monolithic Warmhouse System")
+System_Ext(sensors, "Heating Sensors", "External sensor located in customer's house")
+
+Rel(customer, monolithic, "Get temperature of location and control sensors")
+Rel(specialist, monolithic, "Register tempreture sensors in warmhouse system")
+Rel(sensors, monolithic, "Send tempreture by user request")
+Rel(monolithic, sensors, "Send on, off control relay commands by users")
+
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+title Warmhouse System Customer Code
+
+top to bottom direction
+
+!includeurl ../include/C4_Component.puml
+
+class Customer {
+  +String name
+  +String email
+  +String phone
+  +List<House> houses
+  +void register()
+  +void delete()
+  +void sigin()
+  +void sigout()
+}
+
+class House {
+  +List<Module> modules
+  +String address
+  +Date start_date
+  +Date end_date
+  +boolean status
+  +boolean create()
+  +boolean delete()
+  +boolean update()
+}
+
+class Module {
+  +Date register_date
+  +String name
+  +String serial_number
+  +boolean relay_status
+  +boolean is_module()
+  +boolean create()
+  +boolean delete()
+  +boolean update()
+}
+
+class Sensor {
+  +String name
+  +String serial_number
+  +boolean status
+  +SensorType sensor_type
+  +boolean create()
+  +boolean delete()
+  +boolean update()
+}
+
+class SensorType {
+  +int id
+  +String name
+}
+
+Customer "1" -- "0..*" House : has
+House "1" -- "0..*" Module : has
+Module "1" -- "1..*" Sensor : has
+Sensor "1" -- "1" SensorType : includes
+
+@enduml

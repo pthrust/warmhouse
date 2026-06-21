@@ -1,0 +1,34 @@
+@startuml
+title Warmhouse System Web Application
+
+top to bottom direction
+
+!includeurl ../include/C4_Component.puml
+
+Container_Boundary(warmhouse, "Warmhouse System") {
+  Container(WebApp, "Web application", "Python")
+
+  Container(OrderManagment, "Order managment", "Microservice", "Creation of promotions and add information about new modules")
+  Container(PartnerNetwork, "Partner network", "Microservice", "Contains information about warmhous's partners and their provided services")
+  Container(ModuleManagment, "Module Managment", "Microservice", "Control relay's modules, register a new module in system and their setting")
+}
+
+Container(WebApp, "Web Application", "Python") {
+  Component(authorization, "Authorization", "Control user authorization")
+  Component(userprofile, "UserProfile", "Contol user profile")
+  Component(customerprofile, "CustomerProfile", "Contol customer profile")
+  Component(partnerprofile, "PartnerProfile", "Contol partner profile")
+  Component(employeeprofile, "EmployeeProfile", "Contol employee profile")
+}
+
+Rel(authorization,userprofile,"")
+Rel(userprofile,customerprofile,"")
+Rel(userprofile,partnerprofile,"")
+Rel(userprofile,employeeprofile,"")
+Rel(customerprofile,ModuleManagment,"Register module")
+Rel(customerprofile,PartnerNetwork,"buy partner services")
+Rel(partnerprofile,PartnerNetwork,"Establishes the services provided to customers")
+Rel(employeeprofile,PartnerNetwork,"Verificate partners")
+Rel(employeeprofile,OrderManagment,"")
+
+@enduml
