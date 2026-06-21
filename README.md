@@ -199,8 +199,9 @@ Locations - название комнаты, sensorId - идентификато
 
 [SQL скрипт](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/db_scripts/init.sql)
 
-
 На момент перехода, в старой системе зарегистрировано 2500 пользоваетелей и часть пользователей компания зарегистрировала в новой системе и научила их пользоваться.
+
+Для проверки MVP был сделан [api метод](http://localhost:9000/api/v1/users/random/client), который рандомно выбирает клиента из базы данных и выводит по нему информацию
 
 [Результат монолита в новой системе для старых пользователей с сенсорами](https://github.com/pthrust/warmhouse/blob/warmhouse/screenshots/old_system_result.png)
 
