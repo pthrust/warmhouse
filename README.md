@@ -137,7 +137,8 @@ AsyncAPI будет используют для асинхронного вза�
 [Sensor Monitoring](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/sensor_monitoring/swagger.json)  
 [Sensor Monitoring Online](http://localhost:9004/docs)
 
-[Sensor Webapp](http://localhost:9000/docs)
+[Sensor Webapp](https://github.com/pthrust/warmhouse/blob/warmhouse/apps/webapp/swagger.json)  
+[Sensor Webapp Online](http://localhost:9000/docs)
 
 # Задание 5. Работа с docker и docker-compose
 
